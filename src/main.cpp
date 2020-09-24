@@ -82,7 +82,7 @@ void loadDgo(const char *dgoname, bool shouldDump)
 void dumpAsm(const char *outdir, MetaGoFile *go)
 {
 	char fileName[1024];
-	sprintf(fileName, "%s\\%s.asm", outdir, go->fileName.c_str());
+	sprintf(fileName, "%s/%s.asm", outdir, go->fileName.c_str());
 
 	FILE *fp = fopen(fileName, "w");
 	if (!fp)
@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
 	const char *outdir = argv[2];
 	const char *inDgo = argv[3];
 
-	_mkdir(outdir);
+	std::filesystem::create_directory(outdir);
 
 	InitMachine();
 
@@ -141,7 +141,7 @@ int main(int argc, char *argv[])
 		for (MetaGoFile *go : metaGoFiles)
 			dumpRawBin(outdir, go);
 	} else if (!strcmp(mode, "-asm")) {
-		for each (MetaGoFile *go in metaGoFiles)
+	    for(MetaGoFile *go : metaGoFiles)
 			dumpAsm(outdir, go);
 	} else {
 		fprintf(stderr, "goaldis: Invalid mode '%s'.\n", mode);

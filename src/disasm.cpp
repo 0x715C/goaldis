@@ -372,7 +372,7 @@ void disasmFile(FILE *fp, MetaGoFile *go, bool final_pass)
 {
 	disasmBegin(fp, go, final_pass);
 
-	for each (const MetaSegment &s in go->segments)
+	for(const MetaSegment &s : go->segments)
 	{
 		WRITE(";==================================================================\n");
 		WRITE("\t.segment %s\n", s.name.c_str());
@@ -384,7 +384,7 @@ void disasmFile(FILE *fp, MetaGoFile *go, bool final_pass)
 
 		// Find all objects in this segment.
 		vector<uint32_t *> objs;
-		for each (uint32_t *obj in go->objects)
+		for(uint32_t *obj : go->objects)
 		{
 			if (obj >= s.start && obj < end)
 				objs.push_back(obj);
@@ -392,7 +392,7 @@ void disasmFile(FILE *fp, MetaGoFile *go, bool final_pass)
 
 		std::sort(objs.begin(), objs.end());
 
-		for each (uint32_t *obj in objs)
+		for(uint32_t *obj : objs)
 		{
 			if (obj < prev)
 				continue;
@@ -408,11 +408,11 @@ void disasmFile(FILE *fp, MetaGoFile *go, bool final_pass)
 
 	// Renumber labels in order.
 	vector<uint32_t *> all;
-	for each (pair<uint32_t *, string> x in labels)
+	for(pair<uint32_t *, string> x : labels)
 		all.push_back(x.first);
 	sort(all.begin(), all.end());
 	int i = 1;
-	for each (uint32_t *x in all)
+	for(uint32_t *x : all)
 	{
 		// Check it's an auto-generated name.
 		string s = labels[x];

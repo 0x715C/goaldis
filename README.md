@@ -1,5 +1,15 @@
 # goaldis
 
+I've modified the source so it can be compiled for x86 linux.
+It's now a cmake project instead of Visual Studio.
+
+To build 
+  -run "mkdir build && cd build"
+  -run "cmake ."
+  -run "make"
+
+---PREFORK README---
+
 This utility disassembles all the code/data on a PlayStation2 disc of Jak & Daxter.
 
 Usage:

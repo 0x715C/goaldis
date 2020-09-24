@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <assert.h>
-#include <direct.h>
+#include <filesystem>
 #include <vector>
 #include <string>
 #include <set>
